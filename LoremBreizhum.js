@@ -48,46 +48,118 @@ define(function (require, exports, module) {
     
     var FORTUNE_FILE_ARRAY  = require("text!fortunes.txt").split("%");
     
-    var HELP_URL = "https://github.com/lkcampbell/brackets-lorem-ipsum#how-to-use-lorem-ipsum-generator";
+    var HELP_URL = "https://github.com/YoruNoHikage/brackets-lorem-breizhum#how-to-use-lorem-breizhum-generator";
     
     // --- Private members
     var _allSizes = [ SIZE_SHORT, SIZE_MEDIUM, SIZE_LONG, SIZE_VERY_LONG ];
     
     var _shortWords     = [ // Words with less than four letters
-        "a", "ab", "ad", "an", "aut", "de", "do", "e", "ea", "est",
-        "et", "eu", "ex", "hic", "id", "iis", "in", "ita", "nam", "ne",
-        "non", "o", "qui", "quo", "se", "sed", "si", "te", "ubi", "ut"
+        "ael", "aer", "aes", "aes", "aet", "ali", "ali", "all", "anv", "aod", "aon", "bag", "Baz", "bed", "beg", "bev", "bez", "biz", "bod", "bro",
+        "da", "dek", "den", "den", "dir", "don", "dor", "dra", "dre", "du", "du", "du", "e", "e", "e", "e", "eil", "eme", "eñ", "eno", "eo", "eor",
+        "eta", "eur", "eus", "fri", "fur", "gar", "ger", "giz", "giz", "giz", "goz", "hag", "he", "he", "he", "hep", "hi", "hir", "hol", "hol", "hon",
+        "hon", "hor", "hor", "jod", "kae", "kar", "kas", "kav", "ken", "ken", "ker", "kêr", "kêr", "kêr", "ki", "kig", "kof", "las", "ler", "liv",
+        "liv", "liv", "loa", "lun", "lur", "ma", "mab", "mae", "mar", "mat", "mat", "me", "me", "mel", "met", "mil", "miz", "mor", "mui", "na", "nag",
+        "nav", "ni", "niz", "noz", "o", "oan", "pa", "pal", "pe", "pe", "pep", "per", "piv", "piz", "pod", "pri", "rak", "re", "re", "ret", "rev",
+        "ruz", "sae", "spi", "sul", "Sun", "tad", "tal", "tan", "te", "ti", "tog", "tre", "tri", "tro", "tu", "tud", "vi", "war", "ya", "yar", "yen",
+        "yod"
     ];
     
     var _mediumWords    = [ // Words with four to six letters
-        "amet", "aliqua", "anim", "aute", "cillum", "culpa", "dolor",
-        "dolore", "duis", "elit", "enim", "eram", "esse", "fore",
-        "fugiat", "illum", "ipsum", "irure", "labore", "legam",
-        "lorem", "magna", "malis", "minim", "multos", "nisi",
-        "noster", "nulla", "quae", "quem", "quid", "quis", "quorum",
-        "sint", "summis", "sunt", "tamen", "varias", "velit", "veniam"
+        "a zo", "a-bell", "a-bell", "a-benn", "a-bezh", "a-hed", "a-raok", "abaoe", "abeg", "abeg", "abred", "adarre", "adarre", "ahont", "aketus",
+        "alies", "amañ", "amezeg", "ampart", "amzer", "anal", "anal", "anzav", "aotre", "aotrou", "aotrou", "aour", "aozañ", "ar re", "ar re",
+        "arabat", "arar", "arat", "arc'h", "armel", "arnev", "arvar", "asied", "askell", "askorn", "atav", "aval", "avat", "avat", "avel", "azezañ",
+        "bagad", "bagad", "bale", "bale", "bank", "bann", "banne", "bara", "barv", "bazh", "beaj", "beajiñ", "beleg", "bemdez", "bemnoz", "benveg",
+        "bered", "bern", "berr", "betek", "beuziñ", "beuziñ", "bevañ", "bier", "bihan", "biken", "birviñ", "bleud", "bleun", "blev", "bloaz", "blot",
+        "bodañ", "bodet", "bodet", "bolz", "botez", "boued", "boull", "boutañ", "bouton", "bouzar", "bragoù", "brank", "bras", "brav", "Breizh",
+        "bremañ", "Brest", "breur", "brezel", "Briad", "brodañ", "broust", "brozh", "brozh", "brudet", "bruzun", "buan", "bugale", "bugel", "buhez",
+        "buoc'h", "butun", "c'hewz", "c'hoar", "c'hwi", "chal", "chapel", "chase", "chom", "chom", "daeroù", "dale", "dall", "dant", "dañvad",
+        "danvez", "daou", "darev", "darev", "darn", "dastum", "debriñ", "dec'h", "degas", "dehou", "deiz", "delioù", "deskiñ", "devezh", "diaes",
+        "dianav", "diaoul", "dibab", "dienn", "difenn", "digant", "digor", "digor", "dija", "dilhad", "dilun", "dindan", "diouzh", "dirak", "diskar",
+        "diskar", "disul", "divjod", "diwall", "diwall", "diwar", "diwezh", "dlead", "dleout", "doare", "doñjer", "dont", "doñv", "doñv", "doñv",
+        "dorn", "douar", "dougen", "doujañ", "dour", "dreist", "dremm", "dremm", "droug", "droug", "e-mesk", "e-pad", "ebeul", "ebrel", "echu",
+        "echuiñ", "eeun", "eeun", "eget", "egile", "ehan", "eizh", "elgez", "embann", "en-dro", "enep", "enor", "envel", "eost", "eost", "eoul",
+        "erc'h", "Erwan", "esaeañ", "etre", "eured", "eured", "Europa", "Eusa", "evañ", "evel", "evezh", "evit", "eürus", "ezel", "ezhomm", "fall",
+        "farsus", "farsus", "fazi", "fazi", "feiz", "fiñval", "flamm", "foenn", "formaj", "forn", "fresk", "froud", "frout", "galleg", "gallek",
+        "galv", "ganet", "gant", "gant", "gaou", "garm", "garmiñ", "garv", "gavr", "genou", "genver", "geot", "gervel", "glas", "glav", "gleb",
+        "gleb", "glin", "gloan", "goañv", "godell", "goleiñ", "golo", "golo", "gorre", "gortoz", "goude", "gouel", "gouel", "gouere", "gouest",
+        "gouez", "goullo", "goulou", "gounez", "gounit", "gouriz", "graet", "Groe", "gwad", "Gwaien", "gwaz", "gwaz", "gwaz", "gwazh", "gwech",
+        "gwele", "gwenan", "Gwened", "gwener", "gwenn", "gwer", "gwer", "gwern", "gwez", "gwin", "gwir", "gwriat", "hadañ", "hanter", "harp", "harz",
+        "harzoù", "hejañ", "hemañ", "hent", "hent", "heñvel", "heol", "hepken", "hervez", "hini", "hini", "hiziv", "holen", "holl", "holl", "homañ",
+        "houad", "houarn", "huchal", "huñvre", "ifern", "ijinañ", "ilin", "iskis", "istor", "itron", "ivez", "ivin", "izel", "kador", "kaer", "kaier",
+        "kalet", "kalon", "kalz", "kambr", "kanañ", "kann", "kant", "kaol", "kaoued", "kaout", "kargañ", "karout", "karr", "karr", "karrez", "kasoni",
+        "kavout", "kazh", "kefe", "kegin", "kein", "kelc'h", "kelenn", "kelien", "keloù", "Kembre", "kemmañ", "Kemper", "ken na", "kenavo", "kentañ",
+        "kentel", "kerc'h", "Kernev", "kerzu", "keuz", "keuz", "kezeg", "kibell", "kiger", "kilañ", "kilhog", "klañv", "klask", "kleiz", "kleuz",
+        "kloc'h", "klouar", "kloued", "koad", "koan", "koant", "koar", "koef", "koll", "komz", "komz", "kontañ", "kontañ", "korf", "korn", "korn",
+        "kotoñs", "kouevr", "kozh", "kraou", "krediñ", "kregiñ", "kregiñ", "kreion", "kreiz", "kreñv", "krib", "kribañ", "kriz", "kroaz", "kromm",
+        "Krouer", "krouiñ", "kurun", "kustum", "kustum", "kuzh", "kuzh", "kuzhat", "kzaeg", "labous", "laer", "laezh", "lagad", "lakaat", "lamm",
+        "lamm", "lammat", "lamp", "lann", "Lanuon", "laouen", "lazhañ", "leal", "lec'h", "lec'h", "ledan", "lein", "lein", "lemm", "lemm", "lenn",
+        "lenn", "lerenn", "leskiñ", "lestr", "lestr", "leue", "leun", "leur", "levr", "lezel", "lezenn", "lien", "lies", "Liger", "linenn", "liorzh",
+        "lipat", "livañ", "livet", "lizher", "loar", "loen", "loer", "logod", "lonkañ", "lost", "louet", "lous", "maen", "magañ", "mall", "mamm",
+        "maneg", "maouez", "marc'h", "marv", "matezh", "melen", "melen", "menez", "menoz", "menoz", "merc'h", "merenn", "merkañ", "merkañ", "mervel",
+        "meskañ", "mestr", "metrad", "meurzh", "meurzh", "mevel", "mevel", "mezher", "mignon", "milin", "mintin", "mirout", "mirout", "moan", "moc'h",
+        "moereb", "moged", "moger", "mont", "montr", "mouezh", "moulañ", "muzell", "muzul", "nadoz", "naer", "naer", "naet", "nann", "naon", "Naoned",
+        "nebeut", "nec'h", "nec'h", "nemet", "neñv", "nerzh", "netra", "neud", "neuiñ", "neuze", "nevez", "nevez", "nijal", "niver", "nizez", "noazh",
+        "oabl", "oaled", "ober", "ober", "oentr", "onest", "ouzh", "padout", "paeañ", "pakad", "pakañ", "paner", "paot", "paotr", "paotr", "paouez",
+        "paour", "paper", "park", "Pask", "pediñ", "pediñ", "pegañ", "pegeit", "pegen", "pehini", "pehini", "pell", "pell", "pemp", "pemzek",
+        "penaos", "penn", "pennad", "peoc'h", "perak", "pesk", "petra", "pevar", "pignat", "pignat", "piler", "plac'h", "plac'h", "plad", "plant",
+        "plouz", "pluenn", "poan", "poan", "poazh", "pobl", "poent", "poent", "pomper", "pont", "porzh", "porzh", "poull", "poull", "prad", "pred",
+        "prenañ", "preñv", "prest", "priz", "puñs", "rannañ", "razh", "redek", "regiñ", "reiñ", "reizh", "ribl", "rimiañ", "riskl", "roc'h", "roched",
+        "rodell", "roll", "romant", "roud", "rumm", "rumm", "sac'h", "sachañ", "sadorn", "sailh", "sankañ", "saout", "sec'h", "seitek", "seiz",
+        "seizh", "sell", "señin", "sentiñ", "setu", "setu", "seul", "sevel", "sevel", "sevel", "sioul", "sistr", "sivi", "siwazh", "siwazh", "sizhun",
+        "skañv", "skeud", "skiant", "sklaer", "skorn", "skouer", "skubañ", "skuizh", "soavon", "solier", "soñj", "soñj", "soñjal", "soubañ", "spont",
+        "stag", "stagañ", "stal", "stank", "start", "start", "stêr", "stouiñ", "stourm", "stourm", "strad", "stumm", "stur", "sukr", "tabut", "tach",
+        "taer", "tagañ", "tamall", "tamm", "taol", "taol", "tarv", "tasenn", "tavarn", "tenn", "tenn", "tennañ", "teñval", "teod", "terriñ", "teurel",
+        "tevel", "ti-kêr", "toenn", "tomm", "torfed", "tost", "tost", "toull", "tour", "traezh", "traezh", "traoñ", "trec'h", "tregas", "treiñ",
+        "tremen", "treñ", "tresañ", "tresañ", "treut", "trizek", "troad", "trouz", "truez", "ugent", "uhel", "unan", "unnek", "urzh", "yac'h",
+        "yac'h", "yalc'h", "yaou", "yezh", "zoken"
     ];
     
     var _longWords      = [ // Words with seven to ten letters
-        "admodum", "aliquip", "appellat", "arbitror", "cernantur",
-        "commodo", "consequat", "cupidatat", "deserunt", "doctrina",
-        "eiusmod", "excepteur", "expetendis", "fabulas", "incididunt",
-        "incurreret", "ingeniis", "iudicem", "laboris", "laborum",
-        "litteris", "mandaremus", "mentitum", "nescius", "nostrud",
-        "occaecat", "officia", "offendit", "pariatur", "possumus",
-        "probant", "proident", "quamquam", "quibusdam", "senserit",
-        "singulis", "tempor", "ullamco", "vidisse", "voluptate"
+        "a-dreuz", "a-us da", "a-walc'h", "a-wechoù", "abardaez", "ac'hano", "adaozañ", "adaozañ", "alc'houez", "amanenn", "amprevan", "an Orient",
+        "anavezout", "antronoz", "ar Gerveur", "ar gwellañ", "ar gwellañ", "ar muiañ", "ar re all", "arc'hant", "arrebeuri", "aval-douar", "bandenn",
+        "banniel", "banniel", "baradoz", "beajour", "beg-douar", "berrloer", "biskoazh", "biz-bihan", "biz-bras", "biz-meud", "biz-yod", "bleunioù",
+        "bloavezh", "bourc'h", "boutailh", "Brasparz", "breur-kaer", "brezhoneg", "Bro-C'hall", "Bro-saoz", "Bro-Skos", "broustañ", "bruched",
+        "brumenn", "burzhud", "butuniñ", "c'hoant", "c'hoant", "c'hoari", "c'hoarzhin", "c'hoazh", "c'hwec'h", "c'hwevrer", "c'hwezek", "c'hwezhañ",
+        "chadenn", "chaseal", "chaseour", "chokolad", "da gentañ", "daou-ugnet", "daouarn", "daoudroad", "daoulagad", "daoust ha", "daouzek",
+        "darn-muiañ", "degemer", "deiz mat", "den ebet", "derc'hel", "derc'hent", "digalon", "digalon", "digarez", "digempenn", "digwener",
+        "dihuniñ", "dimerc'her", "dimeurzh", "dimezell", "dimeziñ", "diouzhtu", "diriaou", "disadorn", "disheol", "diskenn", "diskenn", "diskiant",
+        "diskiant", "dispign", "distagañ", "distreiñ", "distreiñ", "divalav", "divskouarn", "diwar-benn", "diwezhañ", "diwezhat", "Douarnenez",
+        "doujañs", "dre-holl", "droug-mor", "e-barzh", "e-dreñv", "e-keit-se", "e-keñver", "e-kichen", "e-lec'h", "eizhvet", "en diwezh",
+        "en un taol", "endervezh", "enebour", "er-maez", "etrezek", "evel-se", "evel-se", "falc'hat", "fellout", "feunten", "fiziañs", "flourañ",
+        "follenn", "fourchetez", "fraoñval", "fraoñval", "frouezh", "fuzuilh", "gallout", "glac'har", "glebiañ", "gouelañ", "gouiziek", "goulenn",
+        "gousperoù", "goustad", "gouzañv", "gouzañv", "gouzoug", "gouzout", "grizilh", "gwalc'hiñ", "gwalenn", "gwalenn", "gwaskañ", "gwastell",
+        "gwec'h-mañ", "gwech ebet", "gwechall", "gwelloc'h", "gwelloc'h", "gwelout", "Gwengamp", "gwengolo", "gwenodenn", "gwerenn", "gwerenn",
+        "gwerzhañ", "gwinegr", "gwinizh", "gwirionez", "gwiskamant", "gwiskañ", "gwiskañ", "gwrierez", "hag all", "hantereur", "hanternoz",
+        "hanternoz", "harzhal", "hegarat", "hennezh", "hennont", "hep arvar", "heuliañ", "hevelep", "hevelep", "hevelep", "honnezh", "honnont",
+        "horolaj", "horolaj", "houlenn", "huanadiñ", "jiletenn", "kaeraat", "kaeraat", "kalonek", "kaozeadenn", "karantez", "kardeur", "karr-tann",
+        "karrezek", "kartoñs", "kastell", "kazetenn", "kelc'hiek", "kelenner", "kemener", "kement ha", "kempenn", "kempenn", "ken lies", "kenderv",
+        "keniterv", "kennebeut", "kenwerzh", "kerc'hat", "kerkent", "kerzhout", "kilometrad", "kilpenn", "kleñved", "klevout", "kluchañ", "kompren",
+        "kontadenn", "kontadenn", "kontell", "kontrol", "kouezhañ", "koulskoude", "koulz ha", "koumanant", "koumoul", "kousket", "koustañ",
+        "kreisteiz", "kreisteiz", "kreskiñ", "kreskiñ", "kreskiñ", "kroc'hen", "kuz'h-heol", "kuzuliañ", "labourat", "laerezh", "laerezh",
+        "Landreger", "lavarout", "lec'h all", "legumaj", "leziregezh", "lezirek", "lizherenn", "lunedoù", "mab-bihan", "mab-kaer", "mamm-gaer",
+        "mamm-gozh", "mantell", "mar plij", "marc'had", "marennañ", "marteze", "martolod", "medisin", "melezour", "Menez Arre", "Menez Du",
+        "merc'hed", "merc'her", "mezheven", "micherour", "mignonez", "miliner", "mont kuit", "Montroulez", "Mor Bihan", "Mor Breizh", "morzhol",
+        "mouchouer", "muioc'h", "munutenn", "naetaat", "naontek", "nebeutoc'h", "nec'hin", "nec'hin", "Nedeleg", "niverenn", "niverenn", "ober goap",
+        "oferenn", "ostaleri", "ouzhpenn", "ouzhpenn", "paotred", "paotrig", "patatez", "pegement", "pegoulz", "pelec'h", "penn-araok", "peogwir",
+        "perc'henn", "pesketa", "pesketaer", "peurvuiañ", "pevarzek", "pinvidik", "piz bihañ", "pla'hig", "planken", "pleg-mor", "plijadur",
+        "plijout", "poazhañ", "POD -LIV", "porpant", "poultrenn", "pounner", "prenestr", "prennañ", "prizius", "purgator", "reolenn", "respont",
+        "respont", "Roazhon", "ruilhañ", "sal-debriñ", "Sant-Brieg", "Sant-Malo", "Sant-Nazer", "santout", "santout", "sav-heol", "saveteiñ",
+        "seblantout", "sec'hañ", "sec'hed", "seizhvet", "sellout", "servijañ", "sigaretenn", "siminal", "sizailh", "skalier", "skeudenn", "skevent",
+        "skignañ", "sklerijenn", "skolaer", "skouarn", "skrabañ", "skrijañ", "skuizhañ", "soubenn", "soudard", "spontus", "stlakañ", "tachenn",
+        "tad-kaer", "tad-kozh", "talvezout", "talvoudus", "talvoudus", "tavañjer", "tavarnour", "tec'hout", "tiegezh", "torchañ", "torgenn",
+        "touellañ", "toullañ", "tour-tan", "traonienn", "tregont", "treuziñ", "tri-ugent", "triwec'h", "tro-vrec'h", "troc'hañ", "trubard",
+        "trugarez", "uhelder", "un tammig", "va Doue", "voulouz", "war-dre", "war-dro", "war-lec'h", "war-raok", "warc'hoazh", "warlene", "yaouank",
+        "yaouankiz", "yec'hed", "yenijenn"
     ];
     
     var _veryLongWords  = [ // Words with more than ten letters
-        "adipisicing", "arbitrantur", "cohaerescant", "comprehenderit",
-        "concursionibus", "coniunctione", "consectetur", "despicationes",
-        "distinguantur", "domesticarum", "efflorescere", "eruditionem",
-        "exquisitaque", "exercitation", "familiaritatem", "fidelissimae",
-        "firmissimum", "graviterque", "illustriora", "instituendarum",
-        "imitarentur", "philosophari", "praesentibus", "praetermissum",
-        "relinqueret", "reprehenderit", "sempiternum", "tractavissent",
-        "transferrem", "voluptatibus"
+        "a-greiz-holl", "ankouna'haat", "armel-levrioù", "bag dre lien", "bag-dre-dan", "barrad-glav", "biz-gwalenn", "Breizh-Izel", "Breizh-Uhel",
+        "Breizh-Veur", "c'hoar-gaer", "c'hoarvezout", "c'hoarvezout", "c'hwec'hvet", "c'hwezhañ e fri", "d'a-vihanañ", "degouezhout", "deiz ar bloaz",
+        "dilhad-gwele", "dilhad-kerf", "diskar-amzer", "diwar ar maez", "dont a-benn", "dont a-benn", "doug-pluenn", "dreist-holl", "dreist-holl",
+        "forzh penaos", "gourc'hemenn", "gourc'hemennoù", "hanter-kant", "hent-houarn", "kambrig-kibellañ", "karr-beajourien", "kerkoulz ha",
+        "Konk-Kernev", "koulz-amzer", "Menez Mikael", "merc'h-gaer", "merc'h-vihan", "meur a gwech", "Mor Atlantel", "mousc'hoarzhin", "n'eus forzh",
+        "nevez-amzer", "ober e venoz", "ober war-dro", "pevar-ugent", "poull-kalon", "sal-degemer", "tachenn-c'hoari", "tamm-ha-tamm",
+        "tennañ e anal", "teñvalijenn", "ti-hent-houarn", "tra bennak", "tro-c'houzoug"
     ];
     
     var _allWords = _shortWords.concat(_mediumWords, _longWords, _veryLongWords);
@@ -154,7 +226,7 @@ define(function (require, exports, module) {
         return str.match(new RegExp(regex, "g")).join(brk);
     }
     
-    // --- Lorem Ipsum helper functions
+    // --- Lorem Breizhum helper functions
     function _getRandomWord(size) {
         var wordArray = [];
         

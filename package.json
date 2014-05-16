@@ -1,10 +1,10 @@
 {
-    "name": "brackets-lorem-ipsum",
-    "title": "Lorem Ipsum",
+    "name": "Brackets-Lorem-Breizhum",
+    "title": "Lorem Breizhum",
     "version": "1.0.2",
-    "description": "Generates Lorem Ipsum text automatically in any Brackets document.",
-    "homepage": "https://github.com/lkcampbell/brackets-lorem-ipsum",
-    "author": "Lance Campbell lkcampbell@gmail.com (https://github.com/lkcampbell)",
+    "description": "Generates Lorem Breizhum text automatically in any Brackets document. Forked from brackets-lorem-ipsum.",
+    "homepage": "https://github.com/YoruNoHikage/Brackets-Lorem-Breizhum",
+    "author": "YoruNoHikage yorunohikage@gmail.com (https://github.com/YoruNoHikage)",
     "license": "MIT",
     "categories":"snippets",
     "keywords": [
@@ -13,7 +13,7 @@
     ],
     "files": [
         "fortunes.txt",
-        "LoremIpsum.js",
+        "LoremBreizhum.js",
         "main.js",
         "README.md"
     ],
