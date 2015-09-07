@@ -1,9 +1,9 @@
 {
-    "name": "Brackets-Lorem-Breizhum",
+    "name": "brackets-lorem-breizhum",
     "title": "Lorem Breizhum",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Generates Lorem Breizhum text automatically in any Brackets document. Forked from brackets-lorem-ipsum.",
-    "homepage": "https://github.com/YoruNoHikage/Brackets-Lorem-Breizhum",
+    "homepage": "https://github.com/YoruNoHikage/brackets-lorem-breizhum",
     "author": "YoruNoHikage yorunohikage@gmail.com (https://github.com/YoruNoHikage)",
     "license": "MIT",
     "categories":"snippets",
